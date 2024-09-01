@@ -1,10 +1,9 @@
 import Button from '../ui/Button'
 import nacl from "tweetnacl"
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { generateMnemonic, mnemonicToSeed, validateMnemonic } from 'bip39';
 import { derivePath } from 'ed25519-hd-key';
-import { Keypair, PublicKey } from "@solana/web3.js";
+import { Keypair } from "@solana/web3.js";
 import DropDown from './DropDown';
 //@ts-ignore
 const generateNewMnemonic = () => {
@@ -31,7 +30,6 @@ const Landing = () => {
   const [blockchain, setBlockchain] = useState<string>("");
   const [accounts, setAccounts] = useState<account[]>([])
   const [currentAccount, setCurrentAccount] = useState<number>(0);
-  const navigate = useNavigate();
 
   const addWallet = (seed: string, blockchainCode: string, index: number) => {
     const path = `m/44'/${blockchainCode}'/${++index}'/0'`
