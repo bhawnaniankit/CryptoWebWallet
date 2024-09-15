@@ -50,6 +50,7 @@ const Landing = () => {
   useEffect(() => {
     const accountss = localStorage.getItem("accounts");
     if (accountss) {
+      console.log(typeof (JSON.parse(accountss).value[0].wallets[0].privatekey))
       setAccounts(JSON.parse(accountss).value)
     }
   }, [])
@@ -58,7 +59,7 @@ const Landing = () => {
   if (accounts.length != 0) {
     return <div className=' text-white h-full bg-black my-4 font-mono flex-col flex items-center'>
       <div className='w-[75vw]'>
-        <div className='my-4 font-mono'><DropDown title='Accounts' accounts={accounts} setFn={setCurrentAccount} /></div>
+        <div className='my-4 font-mono shadow'><DropDown title='Accounts' accounts={accounts} setFn={setCurrentAccount} /></div>
         <h1 className='text-white my-4 font-mono text-4xl font-bold'>Wallets</h1>
         <div className=''>
           {
@@ -70,7 +71,7 @@ const Landing = () => {
                   <div className='text-2xl mb-1'>Public Key</div>
                   <div className='text-gray-400 mb-3 text-sm'>{wall.publickey}</div>
                   <div className='text-2xl mb-1'>Private Key</div>
-                  <div className='text-gray-400 mb-1 blur-sm hover:blur-none text-sm'>{54655645444545465456454}</div>
+                  <div className='text-gray-400 mb-1 blur-sm hover:blur-none text-sm'>{wall.privatekey}</div>
                 </div>
               </div>
             })
@@ -120,7 +121,7 @@ const Landing = () => {
           blockchain: blockchain
         }
 
-        const newWallet = addWallet(newAccount.seed, newAccount.blockchain, newAccount.index)
+        const newWallet = addWallet(newAccount.seed, newAccount.blockchain, newAccount.index++)
         newAccount.wallets.push(newWallet)
         setAccounts((oldAccounts) => {
           const newValue = [...oldAccounts, newAccount]

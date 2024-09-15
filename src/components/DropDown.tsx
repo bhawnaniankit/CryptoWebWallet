@@ -14,7 +14,7 @@ const DropDown = ({ title, accounts, setFn }: { title: string, accounts: account
 
       <div id="dropdownHover" className={`z-10 ${toggle ? "block" : "hidden"} bg-white mt-3 divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}>
         <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
-          {accounts.map(() => { return <Item key={num} onClick={() => { setFn(num) }} title={`Account ${num++}`} /> })}
+          {accounts.map((acc) => { return <Item key={num} onClick={() => { setFn(acc.seed) }} title={`Account ${num++}`} /> })}
         </ul>
       </div>
     </>
